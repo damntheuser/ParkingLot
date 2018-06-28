@@ -100,6 +100,8 @@ class ParkingLot {
 		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 		String line;
 		Lot parkingLot = null;
+		System.out.println("Parking Lot Initialised. Start Parking, else "
+				+ "type exit to exit application");
 		try {
 			while ((line = r.readLine()) != null) {
 			    String[] userArgs = line.split(" ");

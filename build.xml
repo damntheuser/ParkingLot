@@ -1,113 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="ParkingLot">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="D:/eclipse/"/>
-    <property name="junit.output.dir" value="junit"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.6"/>
-    <property name="source" value="1.6"/>
-    <path id="JUnit 4.libraryclasspath">
-        <pathelement location="${ECLIPSE_HOME}plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
-        <pathelement location="${ECLIPSE_HOME}plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
-    </path>
-    <path id="ParkingLot.classpath">
-        <pathelement location="bin"/>
-        <path refid="JUnit 4.libraryclasspath"/>
-    </path>
+<project name="ParkingLot" default="dist" basedir=".">
+    <description>
+    simplest example build file
+  </description>
+    <!-- set global properties for this build -->
+    <property name="src" location="src" />
+    <property name="build" location="build" />
+    <property name="dist" location="dist" />
+    <property name="version" value="1.0" />
+ 
     <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
+        <!-- Create the time stamp -->
+        <tstamp />
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build}" />
     </target>
-    <target name="clean">
-        <delete dir="bin"/>
+ 
+    <target name="compile" depends="init" description="compile the source">
+        <!-- Compile the java code from ${src} into ${build} -->
+        <javac srcdir="${src}" destdir="${build}" />
     </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </javac>
+ 
+    <target name="dist" depends="compile" description="generate the distribution">
+        <buildnumber />
+        <!-- Create the distribution directory -->
+        <mkdir dir="${dist}/lib" />
+ 
+        <!-- Put everything in ${build} into the MyApplication-${version}.${build.number}.jar -->
+        <jar destfile="${dist}/lib/ParkingLot.jar" basedir="${build}" >
+    	  <manifest>
+    	    <attribute name="Main-Class" value="parkinglot.ParkingLot" />
+    	  </manifest>
+       	</jar> 	
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target name="ParkingLot">
-        <java classname="parkinglot.ParkingLot" failonerror="true" fork="yes">
-            <classpath refid="ParkingLot.classpath"/>
-        </java>
-    </target>
-    <target name="testParkingLot.test">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="parkinglot.testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="testParkingLot.testGetRegNumbersForColour">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="parkinglot.testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="testParkingLot.testGetSlotNumberForRegNumber (1)">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="testParkingLot.testGetSlotNumberForRegNumber">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="parkinglot.testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="testParkingLot.testGetSlotNumbersForColour">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="parkinglot.testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="testParkingLot.testParkAndLeave (1)">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="testParkingLot.testParkAndLeave">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="parkinglot.testParkingLot" todir="${junit.output.dir}"/>
-            <classpath refid="ParkingLot.classpath"/>
-        </junit>
-    </target>
-    <target name="junitreport">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
+ 
+    <target name="clean" description="clean up">
+        <!-- Delete the ${build} and ${dist} directory trees -->
+        <delete dir="${build}" />
+        <delete dir="${dist}" />
     </target>
 </project>
