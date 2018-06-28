@@ -1,6 +1,7 @@
 package parkinglot;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -72,6 +73,7 @@ class ParkingLot {
 					System.out.print(entry.getValue().regNumber + " ");
 				}
 			}
+			System.out.print("\n");
 		}
 		
 		//slot_numbers_for_cars_with_colour
@@ -81,6 +83,7 @@ class ParkingLot {
 					System.out.print(entry.getKey() + ", ");
 				}
 			}
+			System.out.print("\n");
 		}
 		
 		//slot_number_for_registration_number
@@ -97,42 +100,81 @@ class ParkingLot {
 	}
 	
 	public static void main(String args[]) {
-		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-		String line;
 		Lot parkingLot = null;
-		System.out.println("Parking Lot Initialised. Start Parking, else "
-				+ "type exit to exit application");
-		try {
-			while ((line = r.readLine()) != null) {
-			    String[] userArgs = line.split(" ");
-			    if(userArgs[0].matches("create_parking_lot")) {
-			    	parkingLot = new Lot(Integer.parseInt(userArgs[1]));
-			    }
-			    if(userArgs[0].matches("park")) {
-			    	parkingLot.park(userArgs[1], userArgs[2]);
-			    }
-			    if(userArgs[0].matches("leave")) {
-			    	parkingLot.leave(Integer.parseInt(userArgs[1]));
-			    }
-			    if(userArgs[0].matches("status")) {
-			    	parkingLot.status();
-			    }
-			    if(userArgs[0].matches("registration_numbers_for_cars_with_colour")) {
-			    	parkingLot.regNumbersForColour(userArgs[1]);
-			    }
-			    if(userArgs[0].matches("slot_numbers_for_cars_with_colour")) {
-			    	parkingLot.slotNumbersForColour(userArgs[1]);
-			    }
-			    if(userArgs[0].matches("slot_number_for_registration_number")) {
-			    	parkingLot.slotNumberForRegNumber(userArgs[1]);
-			    }
-			    if(userArgs[0].matches("exit")) {
-			    	System.exit(0);
-			    }
+		if(args.length == 0) {
+			BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+			String line;
+			
+			System.out.println("Parking Lot Initialised. Start Parking, else "
+					+ "type exit to exit application");
+			try {
+				while ((line = r.readLine()) != null) {
+				    String[] userArgs = line.split(" ");
+				    if(userArgs[0].matches("create_parking_lot")) {
+				    	parkingLot = new Lot(Integer.parseInt(userArgs[1]));
+				    }
+				    if(userArgs[0].matches("park")) {
+				    	parkingLot.park(userArgs[1], userArgs[2]);
+				    }
+				    if(userArgs[0].matches("leave")) {
+				    	parkingLot.leave(Integer.parseInt(userArgs[1]));
+				    }
+				    if(userArgs[0].matches("status")) {
+				    	parkingLot.status();
+				    }
+				    if(userArgs[0].matches("registration_numbers_for_cars_with_colour")) {
+				    	parkingLot.regNumbersForColour(userArgs[1]);
+				    }
+				    if(userArgs[0].matches("slot_numbers_for_cars_with_colour")) {
+				    	parkingLot.slotNumbersForColour(userArgs[1]);
+				    }
+				    if(userArgs[0].matches("slot_number_for_registration_number")) {
+				    	parkingLot.slotNumberForRegNumber(userArgs[1]);
+				    }
+				    if(userArgs[0].matches("exit")) {
+				    	r.close();
+				    	System.exit(0);
+				    }
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		else if(args.length == 1) {
+			BufferedReader reader;
+			try  {
+				reader = new BufferedReader(new FileReader(args[0]));
+				String line = reader.readLine();
+				while(line != null) {
+					String[] userArgs = line.split(" ");
+				    if(userArgs[0].matches("create_parking_lot")) {
+				    	parkingLot = new Lot(Integer.parseInt(userArgs[1]));
+				    }
+				    if(userArgs[0].matches("park")) {
+				    	parkingLot.park(userArgs[1], userArgs[2]);
+				    }
+				    if(userArgs[0].matches("leave")) {
+				    	parkingLot.leave(Integer.parseInt(userArgs[1]));
+				    }
+				    if(userArgs[0].matches("status")) {
+				    	parkingLot.status();
+				    }
+				    if(userArgs[0].matches("registration_numbers_for_cars_with_colour")) {
+				    	parkingLot.regNumbersForColour(userArgs[1]);
+				    }
+				    if(userArgs[0].matches("slot_numbers_for_cars_with_colour")) {
+				    	parkingLot.slotNumbersForColour(userArgs[1]);
+				    }
+				    if(userArgs[0].matches("slot_number_for_registration_number")) {
+				    	parkingLot.slotNumberForRegNumber(userArgs[1]);
+				    }
+				    line = reader.readLine();
+				}
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
