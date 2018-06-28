@@ -1,4 +1,5 @@
-package parkinglot;
+
+
 
 import static org.junit.Assert.*;
 

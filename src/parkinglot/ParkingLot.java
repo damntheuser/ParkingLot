@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-class ParkingLot {
+public class ParkingLot {
 	static class Car {
 		String regNumber;
 		String colour;
@@ -18,13 +18,13 @@ class ParkingLot {
 		}
 	}
 	
-	static class Lot {
+	public static class Lot {
 		int capacity;
 		Map<Integer, Car> map = new HashMap<Integer, Car>();
 		//PriorityQueue<Integer> freeSlots = new PriorityQueue<Integer>();
 		PriorityQueue<Integer> freeSlots;
 		
-		Lot (int capacity) {
+		public Lot (int capacity) {
 			this.capacity = capacity;
 			freeSlots = new PriorityQueue<Integer>(capacity);
 			for(int i = 1; i <= this.capacity; i++) {
