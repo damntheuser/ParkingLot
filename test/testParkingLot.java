@@ -11,6 +11,7 @@ public class testParkingLot {
 
 	@Test
 	public void testParkAndLeave() {
+		System.out.println("Testing testParkAndLeave()");
 		Lot parkingLot = new Lot(6);
 		parkingLot.park("KA-01-HH-1234", "White");
 		parkingLot.park("KA-01-HH-9999", "White");
@@ -28,6 +29,7 @@ public class testParkingLot {
 
 	@Test
 	public void testGetRegNumbersForColour() {
+		System.out.println("Testing testGetRegNumbersForColour()");
 		Lot parkingLot = new Lot(6);
 		parkingLot.park("KA-01-HH-1234", "White");
 		parkingLot.park("KA-01-HH-9999", "White");
@@ -44,6 +46,7 @@ public class testParkingLot {
 	
 	@Test
 	public void testGetSlotNumbersForColour() {
+		System.out.println("Testing testGetSlotNumbersForColour()");
 		Lot parkingLot = new Lot(6);
 		parkingLot.park("KA-01-HH-1234", "White");
 		parkingLot.park("KA-01-HH-9999", "White");
@@ -59,6 +62,7 @@ public class testParkingLot {
 	
 	@Test
 	public void testGetSlotNumberForRegNumber() {
+		System.out.println("Testing testGetSlotNumberForRegNumber()");
 		Lot parkingLot = new Lot(6);
 		parkingLot.park("KA-01-HH-1234", "White");
 		parkingLot.park("KA-01-HH-9999", "White");
