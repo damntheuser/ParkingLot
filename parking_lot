@@ -1,4 +1,5 @@
 #!/bin/bash
 ant clean
 ant dist
+ant junit
 java -jar dist/lib/ParkingLot.jar $1 
