@@ -8,7 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+//Top level class that has nested classes to define car and the actual 
+//parking lot
 public class ParkingLot {
+	//The definition of a car that enters the parking lot
+	//This has reg number and colour as properties.
 	static class Car {
 		String regNumber;
 		String colour;
@@ -18,12 +22,18 @@ public class ParkingLot {
 		}
 	}
 	
+	//The actual parking lot that needs to be built.
 	public static class Lot {
+		//Capacity of the parking lot
 		int capacity;
+		//HashMap to store the slot and car object that enters the lot.
 		Map<Integer, Car> map = new HashMap<Integer, Car>();
 		//PriorityQueue<Integer> freeSlots = new PriorityQueue<Integer>();
+		//Queue to store the values of free slots in increasing order of 
+		//proximity to the entrance.
 		PriorityQueue<Integer> freeSlots;
 		
+		//Constructor
 		public Lot (int capacity) {
 			this.capacity = capacity;
 			freeSlots = new PriorityQueue<Integer>(capacity);
